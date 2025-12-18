@@ -43,5 +43,33 @@ const bookStore = {
     ]
 }
 
-// Write your code here!
+//Write your code here!
 
+const bookStoreTitle = document.querySelector('#header');
+bookStoreTitle.textContent = bookStore.name;
+
+const bookList = document.querySelector('#book-list');
+
+for (let i = 0; i < bookStore.books.length; i++) {
+    const book = bookStore.books[i];
+    
+    const bookContainer = document.createElement('li');
+    
+    const bookTitle = document.createElement('h3');
+    bookTitle.textContent = book.title;
+    
+    const bookAuthor = document.createElement('p');
+    bookAuthor.textContent = book.author;
+    
+    const bookImage = document.createElement('img');
+    bookImage.src = book.imageUrl;
+    
+    bookContainer.appendChild(bookTitle);
+    bookContainer.appendChild(bookAuthor);
+    bookContainer.appendChild(bookImage);
+    
+    bookList.appendChild(bookContainer);
+}
+
+const elementToDelete = document.querySelector('#delete-this');
+elementToDelete.remove();
