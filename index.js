@@ -1,75 +1,98 @@
-const bookStore = {
-    name: 'Flatbooks Technical Books',
-    books: [
-        {
-            id:1,
-            title: 'Eloquent JavaScript: A Modern Introduction to Programming',
-            author: 'Marjin Haverbeke',
-            imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/51IKycqTPUL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg',
-            
-        },
-        {
-            id:2,
-            title: 'JavaScript & JQuery: Interactive Front-End Web Development',
-            author: 'Jon Duckett',
-            imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/31SRWF+LkKL._SX398_BO1,204,203,200_.jpg'
-        },
-        {
-            id:3,
-            title: 'JavaScript: The Good Parts',
-            author: 'Douglas Crockford',
-            imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/5131OWtQRaL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg',
-        },
-        {
-            id:4,
-            title: 'JavaScript: The Definitive Guide',
-            author: 'David Flanagan',
-            imageUrl: "https://images-na.ssl-images-amazon.com/images/I/51wijnc-Y8L._SX379_BO1,204,203,200_.jpg"
-            
-        },
-        {
-            id:5,
-            title: 'You Don’t Know JS',
-            author: 'Kyle Simpson',
-            imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/41T5H8u7fUL._SX331_BO1,204,203,200_.jpg'
-        },
-        {
-            id:6,
-            title: 'Cracking the Coding Interview',
-            author: 'Gayle Laakmann McDowell',
-            imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/41oYsXjLvZL._SY344_BO1,204,203,200_.jpg'
-            
-        }
-    ]
+// Handle Button Clicks
+
+// Function to change the background color when a button is clicked
+function changeBackgroundColor() {
+  // I read the comment and understand to change the background color
+  document.body.style.backgroundColor = 'rgb(173, 216, 230)'; // lightblue
 }
 
-//Write your code here!
-
-const bookStoreTitle = document.querySelector('#header');
-bookStoreTitle.textContent = bookStore.name;
-
-const bookList = document.querySelector('#book-list');
-
-for (let i = 0; i < bookStore.books.length; i++) {
-    const book = bookStore.books[i];
-    
-    const bookContainer = document.createElement('li');
-    
-    const bookTitle = document.createElement('h3');
-    bookTitle.textContent = book.title;
-    
-    const bookAuthor = document.createElement('p');
-    bookAuthor.textContent = book.author;
-    
-    const bookImage = document.createElement('img');
-    bookImage.src = book.imageUrl;
-    
-    bookContainer.appendChild(bookTitle);
-    bookContainer.appendChild(bookAuthor);
-    bookContainer.appendChild(bookImage);
-    
-    bookList.appendChild(bookContainer);
+// Function to reset the background color when the body is double-clicked
+function resetBackgroundColor() {
+  // I read the comment and understand to reset the background color to white
+  document.body.style.backgroundColor = '';
 }
 
-const elementToDelete = document.querySelector('#delete-this');
-elementToDelete.remove();
+// Capture Keyboard Input
+
+// Function to display the key pressed by the user
+function displayKeyPress(event) {
+  document.getElementById('keyPressDisplay').textContent = `Key pressed: ${event.key}`;
+}
+
+// Process Text Input
+
+// Function to display user input in real-time
+function displayUserInput() {
+  const inputValue = document.getElementById('textInput').value;
+  document.getElementById('textInputDisplay').textContent = `You typed: ${inputValue}`;
+}
+
+// Bonus: Mouseover and mouseout events
+function handleMouseOver(event) {
+  event.target.style.backgroundColor = 'yellow';
+}
+
+function handleMouseOut(event) {
+  event.target.style.backgroundColor = '';
+}
+
+// Bonus: Submit event
+function handleFormSubmit(event) {
+  event.preventDefault();
+  const formValue = document.getElementById('formInput').value;
+  document.getElementById('formResult').textContent = `Form submitted with: ${formValue}`;
+}
+
+// Attach Event Listeners
+function setupEventListeners() {
+// Attach event listener to change background color when the button is clicked
+  document
+    .getElementById('changeColorButton')
+    .addEventListener('click', changeBackgroundColor)
+
+  // Attach event listener to reset background color when the body is double-clicked
+  document
+    .getElementById('resetColorButton')
+    .addEventListener('dblclick', resetBackgroundColor)
+
+  // Attach event listener to display key pressed when a key is pressed down
+  document.addEventListener('keydown', displayKeyPress)
+
+  // Attach event listener to display user input in real-time as they type
+  document.getElementById('textInput').addEventListener('input', displayUserInput)
+
+  // Bonus: Attach mouseover and mouseout to buttons
+  document
+    .getElementById('changeColorButton')
+    .addEventListener('mouseover', handleMouseOver)
+  document
+    .getElementById('changeColorButton')
+    .addEventListener('mouseout', handleMouseOut)
+  document
+    .getElementById('resetColorButton')
+    .addEventListener('mouseover', handleMouseOver)
+  document
+    .getElementById('resetColorButton')
+    .addEventListener('mouseout', handleMouseOut)
+
+  // Bonus: Attach submit event to form
+  document
+    .getElementById('sampleForm')
+    .addEventListener('submit', handleFormSubmit)
+}
+
+// Initialize event listeners when the DOM is loaded
+if (typeof window !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', setupEventListeners)
+}
+
+module.exports = {
+  changeBackgroundColor,
+  resetBackgroundColor,
+  displayKeyPress,
+  displayUserInput,
+  handleMouseOver,
+  handleMouseOut,
+  handleFormSubmit,
+  setupEventListeners,
+}
